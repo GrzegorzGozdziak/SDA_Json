@@ -27,6 +27,7 @@ public class jsonMapperTest {
         Assert.assertEquals(Arrays.asList("Marek", "Zosia"), user.getChildrenNames());
     }
 
+    @Test
     public void test2() throws IOException {
         User user = new UserBuilder()
                 .withFirstName("Janek")
@@ -43,6 +44,23 @@ public class jsonMapperTest {
         Assert.assertTrue(serializedObject.contains("\"firstName\":\"Janek\""));
         Assert.assertTrue(serializedObject.contains("Kaczmarek"));
         Assert.assertTrue(serializedObject.contains("Ola"));
+    }
+
+    @Test
+    public void test3() throws IOException {
+        User user = new UserBuilder()
+                .withFirstName("Janek")
+                .withLastName("Kaczmarek")
+                .withAddresses("Work", new AddressBuilder().withCity("Wawa").withCode("11-111").withStreet("Nowa").build())
+                .withAddresses("Home", new AddressBuilder().withCity("Wawa").withCode("11-111").withStreet("Domowa").build())
+                .withChildrenNames(null)
+                .build();
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        String serializedObject = mapper.writeValueAsString(user);
+
+        System.out.println(serializedObject);
     }
 
 }

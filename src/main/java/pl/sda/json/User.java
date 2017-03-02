@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@JsonSerialize
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class User {
     private String firstName;
     private String lastName;
